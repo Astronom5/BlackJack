@@ -1,3 +1,4 @@
+from cgitb import handler
 from random import shuffle
 
 
@@ -25,16 +26,21 @@ class Deck:
 class Player:
     def __init__(self,nick):
         self.nick = nick
+        self.hand = Hand()
+    def __repr__(self) -> str:
+        return f'{self.nick}, {self.hand}'
 class Hand:
     cards = None
     def __init__(self):
         self.cards=[]
-    def draw(self,deck):
-        self.cards.append(deck.pop(0))
+    def draw(self,deck, number_of_cards):
+        for i in range(number_of_cards):
+            self.cards.append(deck.pop(0))
     def __repr__(self):
-        return f'{self.cards} {self.cards}'
+        return f'{self.cards}'
     def power(self):
-        
+        #Needed to be updated Rules : numbers -> number value, figures -> 10 Ace -> 1 or 11, 2 Aces ->21 (if at start)
+        pass
 
 
 Ace = Card('Spades', 'A')
@@ -46,7 +52,11 @@ print(deck.deck)
 deck.shuffle()
 print(Ace)
 my_hand = Hand()
-my_hand.draw(deck.deck)
+my_hand.draw(deck.deck,1)
 print(my_hand.cards)
 
+Me = Player('Astronom')
+Me.hand.draw(deck.deck,10)
+print(Me)
+print(len(deck.deck))
 

@@ -42,11 +42,19 @@ class Hand:
         self.points = 0 # Optionally change names between power and points.
         if self.cards != []:
             for x in range(len(self.cards)):
-                print(self.cards[x])
-        else:
+                print(self.cards[x]) # Need to be deleted durin cleaning the code
+                if isinstance(self.cards[x].value,int):
+                    self.points = self.points + self.cards[x].value
+                elif self.cards[x].value != 'A':
+                    self.points = self.points + 10
+                elif len(self.cards)>2:
+                    self.points +=1
+                elif x==0 and self.cards[1].value == 'A':
+                    self.points +=10
+                else:
+                    self.points +=11
+        # else:
             ####ERROR Exception needed        
-        #Needed to be updated Rules : numbers -> number value, figures -> 10 Ace -> 1 or 11, 2 Aces ->21 (if at start)
-            pass
 
 
 class Game:
@@ -58,8 +66,10 @@ deck = Deck(list_of_colours,list_of_values)
 print(deck.deck)
 deck.shuffle()
 Me = Player('Astronom')
-Me.hand.draw(deck.deck,10)
+Me.hand.draw(deck.deck,2)
 print(Me)
 Me.hand.power()
+print(Me.hand.points)
+
 
 

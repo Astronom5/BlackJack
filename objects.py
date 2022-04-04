@@ -26,7 +26,7 @@ class Player:
         self.nick = nick
         self.hand = Hand()
     def __repr__(self) -> str:
-        return f'{self.nick}, {self.hand}'
+        return f'{self.nick}\'s cards: {self.hand}'
 
 
 class Hand:
@@ -53,12 +53,21 @@ class Hand:
                     self.points +=10
                 else:
                     self.points +=11
-        # else:
-            ####ERROR Exception needed        
+        else:
+            print('Masz pustę rękę, dobierz karty')       
 
 
 class Game:
-    pass
+    max_players = 10
+    def __init__(self,list_of_nicknames):
+        self.list_of_players = []
+        list_of_nicknames.append('Croupier') ## In this case croupier will always be at the end of the list of players
+        for nick in list_of_nicknames:
+            self.list_of_players.append(Player(nick))
+
+    def __repr__(self):
+        return f'{self.list_of_players}'
+
 
 list_of_colours =['Spade','Heart','Diamond','Clover'] ### transfer it to Deck?
 list_of_values = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'] ### transfer it to Deck?
@@ -70,6 +79,10 @@ Me.hand.draw(deck.deck,2)
 print(Me)
 Me.hand.power()
 print(Me.hand.points)
+hand=Hand()
+hand.power()
+game = Game(list_of_colours)
+print(game)
 
 
 

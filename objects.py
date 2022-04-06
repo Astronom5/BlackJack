@@ -25,8 +25,16 @@ class Player:
     def __init__(self,nick):
         self.nick = nick
         self.hand = Hand()
+        self.decision = None
     def __repr__(self) -> str:
         return f'{self.nick}\'s cards: {self.hand}'
+    def choice(self):
+        print(f'{self} \nDo You want to hit or stand?')
+        decision = None
+        while decision != 'hit' and decision != 'stand':
+            decision = input('Please write hit or stand: ')
+        self.decision = decision
+
 
 
 class Hand:
@@ -58,21 +66,36 @@ class Hand:
 
 
 class Game:
-    max_players = 10
-    def __init__(self,list_of_nicknames):
+    def __init__(self,list_of_nicknames,deck,number_of_players):
+        self.max_players = number_of_players
         self.list_of_players = []
-        list_of_nicknames.append('Croupier') ## In this case croupier will always be at the end of the list of players
-        for nick in list_of_nicknames:
-            self.list_of_players.append(Player(nick))
+        if len(list_of_nicknames)<self.max_players:
+            list_of_nicknames.append('Croupier') ## In this case croupier will always be at the end of the list of players
+            self.list_of_players = [Player(nick) for nick in list_of_nicknames] ## List comprehension
+            for player in self.list_of_players:
+                player.hand.draw(deck,2)
+        else:
+            print('Too many players, somebody must resign')
+    def play(self):
+        end_flag = 0
+        while end_flag !=1:
+            end_flag = 1
+            for player in self.list_of_players:
+                print(player)
+                if player.decision != 'stand':
+                    player.choice()
+                    end_flag = 0
+
+        pass    
 
     def __repr__(self):
-        return f'{self.list_of_players}'
+        return f'{self.list_of_players[:-1]}, Croupier\'s card: {self.list_of_players[-1].hand.cards[0]}'
 
 
 list_of_colours =['Spade','Heart','Diamond','Clover'] ### transfer it to Deck?
 list_of_values = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'] ### transfer it to Deck?
 deck = Deck(list_of_colours,list_of_values)
-print(deck.deck)
+# print(deck.deck)
 deck.shuffle()
 Me = Player('Astronom')
 Me.hand.draw(deck.deck,2)
@@ -81,8 +104,11 @@ Me.hand.power()
 print(Me.hand.points)
 hand=Hand()
 hand.power()
-game = Game(list_of_colours)
+game = Game(list_of_colours,deck.deck,5)
 print(game)
+print(len(deck.deck))
+game.play()
+Me.choice()
 
 
 

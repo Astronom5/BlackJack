@@ -39,6 +39,7 @@ class Player:
 
 class Hand:
     cards = None
+    points = 0
     def __init__(self):
         self.cards=[]
     def draw(self,deck, number_of_cards):
@@ -70,11 +71,12 @@ class Game:
         self.max_players = number_of_players
         self.list_of_players = []
         self.deck = Deck(list_of_colours,list_of_values)
+        self.deck.shuffle()
         if len(list_of_nicknames)<self.max_players:
             list_of_nicknames.append('Croupier') ## In this case croupier will always be at the end of the list of players
             self.list_of_players = [Player(nick) for nick in list_of_nicknames] ## List comprehension
             for player in self.list_of_players:
-                player.hand.draw(self.deck,2)
+                player.hand.draw(self.deck.deck,2)
         else:
             print('Too many players, somebody must resign')
     def play(self):
@@ -86,9 +88,11 @@ class Game:
                     print(self.list_of_players[:-1])
                     player.choice()
                     if player.decision != 'stand':
-                        player.hand.draw(self.deck,1)
+                        player.hand.draw(self.deck.deck,1)
                         end_flag = 0  
-
+        while self.list_of_players[-1].hand.points <17:
+            self.list_of_players[-1].hand.draw(self.deck.deck,1)
+            self.list_of_players[-1].hand.power()
     def __repr__(self):
         return f'{self.list_of_players[:-1]}, Croupier\'s card: {self.list_of_players[-1].hand.cards[0]}'
 
@@ -112,6 +116,7 @@ print(game)
 print(len(deck.deck))
 game.play()
 Me.choice()
+print(game.list_of_players[-1])
 
 
 

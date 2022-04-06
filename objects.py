@@ -36,7 +36,6 @@ class Player:
         self.decision = decision
 
 
-
 class Hand:
     cards = None
     points = 0
@@ -51,7 +50,6 @@ class Hand:
         self.points = 0 # Optionally change names between power and points.
         if self.cards != []:
             for x in range(len(self.cards)):
-                print(self.cards[x]) # Need to be deleted durin cleaning the code
                 if isinstance(self.cards[x].value,int):
                     self.points = self.points + self.cards[x].value
                 elif self.cards[x].value != 'A':
@@ -97,26 +95,9 @@ class Game:
         return f'{self.list_of_players[:-1]}, Croupier\'s card: {self.list_of_players[-1].hand.cards[0]}'
 
 
-
-#####Code testing##############
 list_of_colours =['Spade','Heart','Diamond','Clover'] ### transfer it to Deck?
 list_of_values = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'] ### transfer it to Deck?
-deck = Deck(list_of_colours,list_of_values)
-# print(deck.deck)
-deck.shuffle()
-Me = Player('Astronom')
-Me.hand.draw(deck.deck,2)
-print(Me)
-Me.hand.power()
-print(Me.hand.points)
-hand=Hand()
-hand.power()
 game = Game(list_of_colours,list_of_colours,list_of_values,5)
 print(game)
-print(len(deck.deck))
 game.play()
-Me.choice()
 print(game.list_of_players[-1])
-
-
-

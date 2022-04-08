@@ -83,7 +83,9 @@ class Game:
             end_flag = 1
             for player in self.list_of_players[:-1]:
                 if player.decision != 'stand':
-                    print(self.list_of_players[:-1])
+                    print('-'*20)
+                    print(self)
+                    print('-'*20)
                     player.choice()
                     if player.decision != 'stand':
                         player.hand.draw(self.deck.deck,1)
@@ -91,13 +93,19 @@ class Game:
         while self.list_of_players[-1].hand.points <17:
             self.list_of_players[-1].hand.draw(self.deck.deck,1)
             self.list_of_players[-1].hand.power()
+        self.end()
     def __repr__(self):
         return f'{self.list_of_players[:-1]}, Croupier\'s card: {self.list_of_players[-1].hand.cards[0]}'
+    def end(self):
+        print('-'*20)
+        for player in self.list_of_players:
+            player.hand.power()
+            print(f'{player} and power of it\'s cards is {player.hand.points}')
+        print('-'*20)
 
 
 list_of_colours =['Spade','Heart','Diamond','Clover'] ### transfer it to Deck?
 list_of_values = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'] ### transfer it to Deck?
 game = Game(list_of_colours,list_of_colours,list_of_values,5)
-print(game)
 game.play()
-print(game.list_of_players[-1])
+

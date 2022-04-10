@@ -1,3 +1,6 @@
+if __name__ =='main':
+    pass
+
 class Hand:
     cards = None
     points = 0

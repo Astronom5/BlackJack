@@ -1,3 +1,6 @@
+if __name__ =='main':
+    pass
+
 from hand import Hand
 
 class Player:

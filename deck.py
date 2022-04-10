@@ -1,3 +1,6 @@
+if __name__ =='main':
+    pass
+
 from random import shuffle
 from card import Card
 

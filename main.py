@@ -1,4 +1,6 @@
 """Main module for the BlackJack game."""
+# @TODO: tests for all modules, GUI, update game logic, coin mechanism, card counting?
+
 from game import Game
 
 list_of_colours =['Spade','Heart','Diamond','Clover'] ### transfer it to Deck?

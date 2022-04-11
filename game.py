@@ -5,7 +5,7 @@ from player import Player
 
 class Game:
     """Game abstraction"""
-    def __init__(self,list_of_nicknames,list_of_colours,list_of_values,number_of_players):
+    def __init__(self,list_of_nicknames,list_of_colours,list_of_values,number_of_players:int):
         self.max_players = number_of_players
         self.list_of_players = []
         self.deck = Deck(list_of_colours,list_of_values)

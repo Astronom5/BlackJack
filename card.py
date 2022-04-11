@@ -1,7 +1,7 @@
-if __name__ =='main':
-    pass
+"""Card module for BlackJack game"""
 
 class Card:
+    """Card abstraction"""
     def __init__(self,colour,value):
         self.colour = colour
         self.value = value

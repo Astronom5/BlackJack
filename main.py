@@ -1,3 +1,4 @@
+"""Main module for the BlackJack game."""
 from game import Game
 
 list_of_colours =['Spade','Heart','Diamond','Clover'] ### transfer it to Deck?

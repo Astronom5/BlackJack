@@ -43,4 +43,4 @@ class Hand:
                 else:
                     self.points +=11
         else:
-            print('Masz pustę rękę, dobierz karty')
+            print('Your hand is empty, please draw the cards')
